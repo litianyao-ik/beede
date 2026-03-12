@@ -1,0 +1,17 @@
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:pages="clr-namespace:beede.Pages"
+       x:Class="beede.AppShell"
+       FlyoutBehavior="Disabled">
+    <TabBar>
+        <Tab Title="HOME" Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" />
+        </Tab>
+        <Tab Title="BILL" Icon="bill.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:BillPage}" />
+        </Tab>
+        <Tab Title="MYSELF" Icon="myself.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:MyselfPage}" />
+        </Tab>
+    </TabBar>
+</Shell>

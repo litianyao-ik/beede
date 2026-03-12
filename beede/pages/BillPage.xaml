@@ -1,0 +1,13 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="beede.Pages.BillPage"
+             Title="BILL">
+    <VerticalStackLayout Spacing="20" Padding="20">
+        <Label Text="BILL" FontSize="30" HorizontalOptions="Center" />
+        <Label Text="Net income :" />
+        <Label x:Name="NetIncomeLabel" Text="$0.00" FontSize="20" />
+        <Entry x:Name="IncomeEntry" Placeholder="income" Keyboard="Numeric" />
+        <Entry x:Name="ExpenditureEntry" Placeholder="expenditure" Keyboard="Numeric" />
+        <Button Text="计算" Clicked="OnCalculateClicked" />
+    </VerticalStackLayout>
+</ContentPage>

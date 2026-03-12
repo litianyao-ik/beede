@@ -1,0 +1,16 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="beede.Pages.BillEditPage"
+             Title="新增账单">
+    <VerticalStackLayout Spacing="15" Padding="20">
+        <Entry x:Name="DescriptionEntry" Placeholder="描述（如：买菜）" />
+        <Entry x:Name="AmountEntry" Placeholder="金额" Keyboard="Numeric" />
+        <Picker x:Name="TypePicker" Title="选择类型">
+            <Picker.Items>
+                <x:String>收入</x:String>
+                <x:String>支出</x:String>
+            </Picker.Items>
+        </Picker>
+        <Button Text="保存" Clicked="OnSaveClicked" />
+    </VerticalStackLayout>
+</ContentPage>
