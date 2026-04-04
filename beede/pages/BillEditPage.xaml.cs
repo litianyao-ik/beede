@@ -1,7 +1,6 @@
 using beede.Models;
 using beede.Services;
 using Microsoft.Maui.Controls;
-using System;
 
 namespace beede.Pages
 {
@@ -17,13 +16,13 @@ namespace beede.Pages
         {
             if (string.IsNullOrWhiteSpace(DescriptionEntry.Text))
             {
-                await DisplayAlert("提示", "请输入描述", "OK");
+                await DisplayAlertAsync("提示", "请输入描述", "OK");
                 return;
             }
 
             if (!double.TryParse(AmountEntry.Text, out double amount))
             {
-                await DisplayAlert("提示", "请输入有效的金额", "OK");
+                await DisplayAlertAsync("提示", "请输入有效的金额", "OK");
                 return;
             }
 
@@ -35,7 +34,8 @@ namespace beede.Pages
                 Date = DateTime.Now
             };
 
-            BillService.Bills.Add(bill);
+            BillService.AddBill(bill);
+
             await Navigation.PopAsync();
         }
     }

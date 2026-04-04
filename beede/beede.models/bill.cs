@@ -2,9 +2,9 @@
 {
     public class Bill
     {
-        public string Description { get; set; }   // 描述
-        public double Amount { get; set; }        // 金额
-        public DateTime Date { get; set; }         // 日期
-        public bool IsIncome { get; set; }         // true=收入，false=支出
+        public string Description { get; set; } = string.Empty;  // 添加 = string.Empty
+        public double Amount { get; set; }
+        public DateTime Date { get; set; }
+        public bool IsIncome { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace beede.Pages
     {
         public BillPage()
         {
-            InitializeComponent();   // 必须存在
+            InitializeComponent();
         }
 
         private void OnCalculateClicked(object sender, EventArgs e)
@@ -14,6 +14,7 @@ namespace beede.Pages
             double income = double.TryParse(IncomeEntry.Text, out var i) ? i : 0;
             double expenditure = double.TryParse(ExpenditureEntry.Text, out var ex) ? ex : 0;
             double net = income - expenditure;
+
             NetIncomeLabel.Text = net.ToString("C");
         }
     }
