@@ -1,14 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="beede.Pages.HomePage"
              Title="HOME">
+
     <VerticalStackLayout Spacing="20" Padding="20">
+
         <Label Text="HOME" FontSize="30" HorizontalOptions="Center" />
+
         <Label Text="Number of recorded bills :" />
         <Label x:Name="RecordedBillsLabel" Text="0" FontSize="20" />
+
         <Label Text="The amount saved :" />
         <Label x:Name="SavedAmountLabel" Text="$0.00" FontSize="20" />
+
         <Button Text="NEW" Clicked="OnNewClicked" />
-        <SearchBar Placeholder="search" />
+
+        <SearchBar x:Name="SearchBar" Placeholder="search" />
+
     </VerticalStackLayout>
+
 </ContentPage>

@@ -1,4 +1,5 @@
 using beede.Services;
+using Microsoft.Maui.Controls;
 
 namespace beede.Pages;
 
@@ -12,10 +13,10 @@ public partial class HomePage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        RefreshDisplay();
+        RefreshData();
     }
 
-    private void RefreshDisplay()
+    private void RefreshData()
     {
         RecordedBillsLabel.Text = BillService.TotalBills.ToString();
         SavedAmountLabel.Text = BillService.SavedAmount.ToString("C");
