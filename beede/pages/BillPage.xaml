@@ -4,18 +4,52 @@
              x:Class="beede.Pages.BillPage"
              Title="BILL">
 
-    <VerticalStackLayout Spacing="20" Padding="20">
+	<Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*,*" Padding="20" RowSpacing="15">
 
-        <Label Text="BILL" FontSize="30" HorizontalOptions="Center" />
+		<!-- 标题 -->
+		<Label Grid.Row="0" Grid.ColumnSpan="2" Text="BILL" FontSize="30" HorizontalOptions="Center" />
 
-        <Label Text="Net income :" />
-        <Label x:Name="NetIncomeLabel" Text="$0.00" FontSize="20" />
+		<!-- Net Income 显示 -->
+		<Label Grid.Row="1" Grid.ColumnSpan="2" Text="Net income :" />
+		<Label Grid.Row="1" Grid.ColumnSpan="2" x:Name="NetIncomeLabel" Text="$0.00" FontSize="20"
+               HorizontalOptions="End" VerticalOptions="End" />
 
-        <Entry x:Name="IncomeEntry" Placeholder="income" Keyboard="Numeric" />
-        <Entry x:Name="ExpenditureEntry" Placeholder="expenditure" Keyboard="Numeric" />
+		<!-- 收入列表标题 -->
+		<Label Grid.Row="2" Grid.Column="0" Text="收入" FontSize="18" FontAttributes="Bold"
+               HorizontalOptions="Center" VerticalOptions="Start" />
 
-        <Button Text="计算" Clicked="OnCalculateClicked" />
+		<!-- 支出列表标题 -->
+		<Label Grid.Row="2" Grid.Column="1" Text="支出" FontSize="18" FontAttributes="Bold"
+               HorizontalOptions="Center" VerticalOptions="Start" />
 
-    </VerticalStackLayout>
+		<!-- 收入列表 -->
+		<CollectionView Grid.Row="3" Grid.Column="0" x:Name="IncomeListView"
+                        SelectionMode="Single" SelectionChanged="OnBillSelected">
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+					<Grid Padding="5" ColumnDefinitions="*,Auto">
+						<Label Text="{Binding Description}" Grid.Column="0" />
+						<Label Text="{Binding Amount, StringFormat='+{0:C}'}" Grid.Column="1"
+                               TextColor="Green" />
+					</Grid>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+		<!-- 支出列表 -->
+		<CollectionView Grid.Row="3" Grid.Column="1" x:Name="ExpenseListView"
+                        SelectionMode="Single" SelectionChanged="OnBillSelected">
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+					<Grid Padding="5" ColumnDefinitions="*,Auto">
+						<Label Text="{Binding Description}" Grid.Column="0" />
+						<Label Text="{Binding Amount, StringFormat='-{0:C}'}" Grid.Column="1"
+                               TextColor="Red" />
+					</Grid>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+	</Grid>
 
 </ContentPage>
