@@ -8,20 +8,20 @@ public static class BillService
     private static string _currentUser = string.Empty;
     private static string DataFolder => FileSystem.AppDataDirectory;
 
-    // 公开的账单列表（只读）
+    // Public bill list (read-only)
     public static IReadOnlyList<Bill> Bills => _bills.AsReadOnly();
 
-    // 统计数据
+    // Statistics
     public static int TotalBills => _bills.Count;
     public static double TotalIncome => _bills.Where(b => b.IsIncome).Sum(b => b.Amount);
     public static double TotalExpenditure => _bills.Where(b => !b.IsIncome).Sum(b => b.Amount);
     public static double SavedAmount => TotalIncome - TotalExpenditure;
 
-    // 获取当前用户的账单文件路径
+    // Get the bill file path for the current user
     private static string GetBillsFilePath(string username) =>
         Path.Combine(DataFolder, $"bills_{username}.json");
 
-    // 加载指定用户的账单
+    // Load bills for a specific user
     public static bool LoadUserBills(string username)
     {
         _currentUser = username;
@@ -48,7 +48,7 @@ public static class BillService
         }
     }
 
-    // 保存当前用户的账单
+    // Save the current user's bills
     private static void SaveCurrentUserBills()
     {
         if (string.IsNullOrEmpty(_currentUser)) return;
@@ -58,14 +58,14 @@ public static class BillService
         File.WriteAllText(filePath, json);
     }
 
-    // 添加账单
+    // Add a bill
     public static void AddBill(Bill bill)
     {
         _bills.Add(bill);
         SaveCurrentUserBills();
     }
 
-    // 删除账单
+    // Delete a bill
     public static bool RemoveBill(Bill bill)
     {
         var result = _bills.Remove(bill);
@@ -73,7 +73,7 @@ public static class BillService
         return result;
     }
 
-    // 清空所有账单
+    // Clear all bills
     public static void ClearAllBills()
     {
         _bills.Clear();

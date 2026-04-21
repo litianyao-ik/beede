@@ -16,21 +16,21 @@ public partial class BillEditPage : ContentPage
 
     private async void OnSaveClicked(object? sender, EventArgs e)
     {
-        // 验证描述
+        // Validate description
         if (DescriptionEntry == null || string.IsNullOrWhiteSpace(DescriptionEntry.Text))
         {
-            await DisplayAlertAsync("提示", "请输入描述", "OK");
+            await DisplayAlertAsync("Notice", "Please enter a description", "OK");
             return;
         }
 
-        // 验证金额
+        // Validate amount
         if (AmountEntry == null || !double.TryParse(AmountEntry.Text, out double amount))
         {
-            await DisplayAlertAsync("提示", "请输入有效的金额", "OK");
+            await DisplayAlertAsync("Notice", "Please enter a valid amount", "OK");
             return;
         }
 
-        // 创建账单
+        // Create bill
         var bill = new Bill
         {
             Description = DescriptionEntry.Text.Trim(),
@@ -39,15 +39,15 @@ public partial class BillEditPage : ContentPage
             Date = DateTime.Now
         };
 
-        // 保存账单
+        // Save bill
         BillService.AddBill(bill);
 
-        // 显示通知
-        string typeText = bill.IsIncome ? "收入" : "支出";
-        await DisplayAlertAsync("完成一笔新的记账",
-            $"已添加 {typeText}：{bill.Description}，金额 {bill.Amount:C}", "OK");
+        // Show notification
+        string typeText = bill.IsIncome ? "Income" : "Expense";
+        await DisplayAlertAsync("New Record Added",
+            $"Added {typeText}: {bill.Description}, Amount: {bill.Amount:C}", "OK");
 
-        // 返回上一页
+        // Go back to previous page
         await Navigation.PopAsync();
     }
 }

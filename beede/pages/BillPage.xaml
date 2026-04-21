@@ -4,52 +4,52 @@
              x:Class="beede.Pages.BillPage"
              Title="BILL">
 
-	<Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*,*" Padding="20" RowSpacing="15">
+    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*,*" Padding="20" RowSpacing="15">
 
-		<!-- 标题 -->
-		<Label Grid.Row="0" Grid.ColumnSpan="2" Text="BILL" FontSize="30" HorizontalOptions="Center" />
+        <!-- Title -->
+        <Label Grid.Row="0" Grid.ColumnSpan="2" Text="BILL" FontSize="30" HorizontalOptions="Center" />
 
-		<!-- Net Income 显示 -->
-		<Label Grid.Row="1" Grid.ColumnSpan="2" Text="Net income :" />
-		<Label Grid.Row="1" Grid.ColumnSpan="2" x:Name="NetIncomeLabel" Text="$0.00" FontSize="20"
+        <!-- Net Income Display -->
+        <Label Grid.Row="1" Grid.ColumnSpan="2" Text="Net income :" />
+        <Label Grid.Row="1" Grid.ColumnSpan="2" x:Name="NetIncomeLabel" Text="$0.00" FontSize="20"
                HorizontalOptions="End" VerticalOptions="End" />
 
-		<!-- 收入列表标题 -->
-		<Label Grid.Row="2" Grid.Column="0" Text="收入" FontSize="18" FontAttributes="Bold"
+        <!-- Income List Header -->
+        <Label Grid.Row="2" Grid.Column="0" Text="Income" FontSize="18" FontAttributes="Bold"
                HorizontalOptions="Center" VerticalOptions="Start" />
 
-		<!-- 支出列表标题 -->
-		<Label Grid.Row="2" Grid.Column="1" Text="支出" FontSize="18" FontAttributes="Bold"
+        <!-- Expense List Header -->
+        <Label Grid.Row="2" Grid.Column="1" Text="Expense" FontSize="18" FontAttributes="Bold"
                HorizontalOptions="Center" VerticalOptions="Start" />
 
-		<!-- 收入列表 -->
-		<CollectionView Grid.Row="3" Grid.Column="0" x:Name="IncomeListView"
+        <!-- Income List -->
+        <CollectionView Grid.Row="3" Grid.Column="0" x:Name="IncomeListView"
                         SelectionMode="Single" SelectionChanged="OnBillSelected">
-			<CollectionView.ItemTemplate>
-				<DataTemplate>
-					<Grid Padding="5" ColumnDefinitions="*,Auto">
-						<Label Text="{Binding Description}" Grid.Column="0" />
-						<Label Text="{Binding Amount, StringFormat='+{0:C}'}" Grid.Column="1"
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5" ColumnDefinitions="*,Auto">
+                        <Label Text="{Binding Description}" Grid.Column="0" />
+                        <Label Text="{Binding Amount, StringFormat='+{0:C}'}" Grid.Column="1"
                                TextColor="Green" />
-					</Grid>
-				</DataTemplate>
-			</CollectionView.ItemTemplate>
-		</CollectionView>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-		<!-- 支出列表 -->
-		<CollectionView Grid.Row="3" Grid.Column="1" x:Name="ExpenseListView"
+        <!-- Expense List -->
+        <CollectionView Grid.Row="3" Grid.Column="1" x:Name="ExpenseListView"
                         SelectionMode="Single" SelectionChanged="OnBillSelected">
-			<CollectionView.ItemTemplate>
-				<DataTemplate>
-					<Grid Padding="5" ColumnDefinitions="*,Auto">
-						<Label Text="{Binding Description}" Grid.Column="0" />
-						<Label Text="{Binding Amount, StringFormat='-{0:C}'}" Grid.Column="1"
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5" ColumnDefinitions="*,Auto">
+                        <Label Text="{Binding Description}" Grid.Column="0" />
+                        <Label Text="{Binding Amount, StringFormat='-{0:C}'}" Grid.Column="1"
                                TextColor="Red" />
-					</Grid>
-				</DataTemplate>
-			</CollectionView.ItemTemplate>
-		</CollectionView>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-	</Grid>
+    </Grid>
 
 </ContentPage>

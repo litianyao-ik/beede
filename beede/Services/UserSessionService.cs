@@ -10,31 +10,31 @@ public class UserSessionService
 
     public string? CurrentUser { get; private set; }
 
-    // 加载所有用户列表
+    // Load all user list
     public List<string> LoadAllUsers()
     {
         if (!File.Exists(UsersFilePath))
-            return new List<string>();  // 保持原样
+            return new List<string>();
 
         var json = File.ReadAllText(UsersFilePath);
         return JsonSerializer.Deserialize<List<string>>(json) ?? new List<string>();
     }
 
-    // 保存用户列表
+    // Save user list
     private void SaveAllUsers(List<string> users)
     {
         var json = JsonSerializer.Serialize(users);
         File.WriteAllText(UsersFilePath, json);
     }
 
-    // 检查用户是否存在
+    // Check if user exists
     public bool UserExists(string username)
     {
         var users = LoadAllUsers();
         return users.Contains(username);
     }
 
-    // 注册新用户
+    // Register new user
     public bool RegisterUser(string username, string password)
     {
         var users = LoadAllUsers();
@@ -42,23 +42,23 @@ public class UserSessionService
         if (users.Contains(username))
             return false;
 
-        // 保存密码
+        // Save password
         var passwordHash = SimpleHash(password);
         var pwdFile = Path.Combine(FileSystem.AppDataDirectory, $"user_{username}.pwd");
         File.WriteAllText(pwdFile, passwordHash);
 
-        // 添加到用户列表
+        // Add to user list
         users.Add(username);
         SaveAllUsers(users);
 
-        // 创建空的账单文件
+        // Create empty bill file
         var billsFile = Path.Combine(FileSystem.AppDataDirectory, $"bills_{username}.json");
         File.WriteAllText(billsFile, "[]");
 
         return true;
     }
 
-    // 登录
+    // Login
     public bool Login(string username, string password)
     {
         var pwdFile = Path.Combine(FileSystem.AppDataDirectory, $"user_{username}.pwd");
@@ -71,24 +71,24 @@ public class UserSessionService
 
         CurrentUser = username;
 
-        // 加载该用户的账单数据
+        // Load the user's bill data
         BillService.LoadUserBills(username);
 
-        // 发送登录通知到 API
+        // Send login notification to API
         _ = DemoApiService.SendLoginNotification(username);
 
         return true;
     }
 
-    // 登出
+    // Logout
     public void Logout()
     {
         CurrentUser = null;
         BillService.ClearAllBills();
     }
 
-    // 简单的哈希函数
-    private static string SimpleHash(string input)  // 添加 static
+    // Simple hash function
+    private static string SimpleHash(string input)
     {
         using var sha256 = System.Security.Cryptography.SHA256.Create();
         var bytes = System.Text.Encoding.UTF8.GetBytes(input);

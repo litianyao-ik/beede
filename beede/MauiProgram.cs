@@ -22,7 +22,7 @@ public static class MauiProgram
 
         var app = builder.Build();
 
-        // 启动演示 API 服务器
+        // Start the demo API server
         DemoApiService.StartServer();
 
         return app;

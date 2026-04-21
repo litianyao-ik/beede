@@ -21,7 +21,7 @@ public static class DemoApiService
             {
                 _listener.Start();
                 _isRunning = true;
-                System.Diagnostics.Debug.WriteLine("[API] 服务器已启动: http://localhost:5000");
+                System.Diagnostics.Debug.WriteLine("[API] Server started: http://localhost:5000");
 
                 while (_isRunning)
                 {
@@ -31,7 +31,7 @@ public static class DemoApiService
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[API] 启动失败: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"[API] Failed to start: {ex.Message}");
             }
         });
     }
@@ -41,7 +41,7 @@ public static class DemoApiService
         _isRunning = false;
         _listener?.Stop();
         _listener?.Close();
-        System.Diagnostics.Debug.WriteLine("[API] 服务器已停止");
+        System.Diagnostics.Debug.WriteLine("[API] Server stopped");
     }
 
     public static async Task SendLoginNotification(string username)
@@ -50,12 +50,12 @@ public static class DemoApiService
 
         try
         {
-            var message = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] 用户 '{username}' 登录了应用";
+            var message = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] User '{username}' logged into the application";
             System.Diagnostics.Debug.WriteLine(message);
 
             using var client = new HttpClient();
             var content = new StringContent(
-                $"{{\"username\":\"{username}\",\"message\":\"用户登录\",\"timestamp\":\"{DateTime.Now:O}\"}}",
+                $"{{\"username\":\"{username}\",\"message\":\"User login\",\"timestamp\":\"{DateTime.Now:O}\"}}",
                 Encoding.UTF8,
                 "application/json");
 
@@ -65,12 +65,12 @@ public static class DemoApiService
             }
             catch
             {
-                // 外部 API 不存在时静默忽略
+                // Silently ignore if external API does not exist
             }
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"[API] 发送通知失败: {ex.Message}");
+            System.Diagnostics.Debug.WriteLine($"[API] Failed to send notification: {ex.Message}");
         }
     }
 
@@ -87,9 +87,9 @@ public static class DemoApiService
                 body = await reader.ReadToEndAsync();
             }
 
-            System.Diagnostics.Debug.WriteLine($"[API] 收到登录请求: {body}");
+            System.Diagnostics.Debug.WriteLine($"[API] Received login request: {body}");
 
-            var responseText = "{\"status\":\"ok\",\"message\":\"登录通知已接收\"}";
+            var responseText = "{\"status\":\"ok\",\"message\":\"Login notification received\"}";
             var buffer = Encoding.UTF8.GetBytes(responseText);
             response.ContentType = "application/json";
             response.ContentLength64 = buffer.Length;
