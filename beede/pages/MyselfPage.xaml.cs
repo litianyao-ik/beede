@@ -6,7 +6,7 @@ namespace beede.Pages
     {
         public MyselfPage()
         {
-            InitializeComponent();   // 必须存在
+            InitializeComponent();   // must exist
         }
 
         private async void OnLoginClicked(object sender, EventArgs e)

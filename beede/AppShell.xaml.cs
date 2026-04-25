@@ -9,7 +9,7 @@ namespace beede
         {
             InitializeComponent();
 
-            // 👇 注册路由（关键）
+            // Register routes (critical)
             Routing.RegisterRoute(nameof(BillPage), typeof(BillPage));
             Routing.RegisterRoute(nameof(BillEditPage), typeof(BillEditPage));
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));

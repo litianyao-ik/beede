@@ -20,14 +20,14 @@ public partial class BillPage : ContentPage
 
     private void RefreshBillLists()
     {
-        // 获取所有账单
+        // Get all bills
         var allBills = BillService.Bills;
 
-        // 收入账单（按日期倒序）
+        // Income bills (sorted by date descending)
         var incomes = allBills.Where(b => b.IsIncome).OrderByDescending(b => b.Date).ToList();
         IncomeListView.ItemsSource = incomes;
 
-        // 支出账单（按日期倒序）
+        // Expense bills (sorted by date descending)
         var expenses = allBills.Where(b => !b.IsIncome).OrderByDescending(b => b.Date).ToList();
         ExpenseListView.ItemsSource = expenses;
     }
@@ -37,29 +37,29 @@ public partial class BillPage : ContentPage
         NetIncomeLabel.Text = BillService.SavedAmount.ToString("C");
     }
 
-    // 点击账单时弹出删除确认
+    // Show delete confirmation when a bill is tapped
     private async void OnBillSelected(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is Bill selectedBill)
         {
-            // 清除选中状态
+            // Clear selection state
             if (sender is CollectionView cv)
                 cv.SelectedItem = null;
 
-            // 确认删除
-            bool confirm = await DisplayAlertAsync("删除账单",
-                $"确定要删除 \"{selectedBill.Description}\" 吗？", "删除", "取消");
+            // Confirm deletion
+            bool confirm = await DisplayAlertAsync("Delete Bill",
+                $"Are you sure you want to delete \"{selectedBill.Description}\"?", "Delete", "Cancel");
 
             if (confirm)
             {
                 BillService.RemoveBill(selectedBill);
 
-                // 刷新列表
+                // Refresh lists
                 RefreshBillLists();
                 UpdateNetIncome();
 
-                // 显示通知
-                await DisplayAlertAsync("通知", "账单已删除", "OK");
+                // Show notification
+                await DisplayAlertAsync("Notice", "Bill has been deleted", "OK");
             }
         }
     }

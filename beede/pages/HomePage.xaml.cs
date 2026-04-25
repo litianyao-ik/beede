@@ -40,7 +40,7 @@ public partial class HomePage : ContentPage
             return;
         }
 
-        // 搜索匹配的账单
+        // Search for matching bills
         var results = BillService.Bills
             .Where(b => b.Description.Contains(keyword, StringComparison.OrdinalIgnoreCase))
             .OrderByDescending(b => b.Date)
@@ -56,18 +56,18 @@ public partial class HomePage : ContentPage
 
         if (bill == null) return;
 
-        bool confirm = await DisplayAlertAsync("删除账单",
-            $"确定要删除 \"{bill.Description}\" 吗？", "删除", "取消");
+        bool confirm = await DisplayAlertAsync("Delete Bill",
+            $"Are you sure you want to delete \"{bill.Description}\"?", "Delete", "Cancel");
 
         if (confirm)
         {
             BillService.RemoveBill(bill);
             RefreshStats();
 
-            // 刷新搜索结果
+            // Refresh search results
             OnSearchTextChanged(SearchBar, new TextChangedEventArgs(SearchBar.Text, SearchBar.Text));
 
-            await DisplayAlertAsync("通知", "账单已删除", "OK");
+            await DisplayAlertAsync("Notice", "Bill has been deleted", "OK");
         }
     }
 

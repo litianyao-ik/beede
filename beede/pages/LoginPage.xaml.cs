@@ -19,18 +19,18 @@ public partial class LoginPage : ContentPage
 
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
-            await DisplayAlertAsync("提示", "请输入用户名和密码", "OK");
+            await DisplayAlertAsync("Notice", "Please enter username and password", "OK");
             return;
         }
 
         if (_session.Login(username, password))
         {
-            // 使用新方式切换页面
+            // Navigate to main page
             Application.Current.MainPage = new AppShell();
             return;
         }
 
-        var result = await DisplayAlertAsync("提示", "用户不存在，是否注册新用户？", "注册", "取消");
+        var result = await DisplayAlertAsync("Notice", "User does not exist. Register new user?", "Register", "Cancel");
         if (result)
         {
             if (_session.RegisterUser(username, password))
@@ -40,7 +40,7 @@ public partial class LoginPage : ContentPage
             }
             else
             {
-                await DisplayAlertAsync("失败", "注册失败，请重试", "OK");
+                await DisplayAlertAsync("Failed", "Registration failed. Please try again.", "OK");
             }
         }
     }
