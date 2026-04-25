@@ -1,4 +1,4 @@
-﻿namespace beede.Models
+﻿namespace beede.beede.models
 {
     public class Bill
     {
